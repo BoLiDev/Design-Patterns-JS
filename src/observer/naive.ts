@@ -10,7 +10,7 @@ class Bank {
   };
 }
 
-class Car {
+export default class Car {
 
   insurance: Insurance;
   bank: Bank;

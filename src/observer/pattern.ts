@@ -20,7 +20,7 @@ class Bank extends Company{
   }
 }
 
-class Car {
+export default class Car {
 
   subscribers: Set<Company>;
   functional: boolean;
