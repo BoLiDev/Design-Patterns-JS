@@ -1,6 +1,3 @@
-/** b.js 
-
-*/
 import { subscribe } from 'a.js'
 
 function B(data) {

@@ -9,6 +9,7 @@ async function A() {
   subscribers.forEach((subscriber) => subscriber(data));
 }
 
+A();
 
 /**library */
 async function fetchData() {
