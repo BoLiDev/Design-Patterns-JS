@@ -1,40 +1,55 @@
-class Company {
+abstract class Subscriber {
   name: string;
   constructor(name: string) {
     this.name = name;
+  }
+  abstract notify(context: unknown): void;
+}
+
+abstract class Publisher {
+
+  subscribers: Set<Subscriber>;
+
+  abstract subscribe(subscriber: Subscriber): void;
+  
+
+  abstract unsubscribe(subscriber: Subscriber): void;
+}
+
+
+class Insurance extends Subscriber{
+  constructor() {
+    super('insurance');
   }
   notify(car: Car) {
     console.log(`${this.name} noticed wether the car is still functional: ${car.functional}`);
   };
 }
 
-class Insurance extends Company{
-  constructor() {
-    super('insurance');
-  }
-}
-
-class Bank extends Company{
+class Bank extends Subscriber{
   constructor() {
     super('bank');
   }
+  notify(car: Car) {
+    console.log(`${this.name} noticed wether the car is still functional: ${car.functional}`);
+  };
 }
 
-export default class Car {
+export default class Car extends Publisher{
 
-  subscribers: Set<Company>;
   functional: boolean;
 
   constructor() {
+    super();
     this.subscribers = new Set();
     this.functional = true;
   }
 
-  register(company: Company) {
+  subscribe(company: Subscriber) {
     this.subscribers.add(company);
   }
 
-  unregister(company: Company) {
+  unsubscribe(company: Subscriber) {
     this.subscribers.delete(company);
   }
 
@@ -50,6 +65,6 @@ export default class Car {
 const myCar = new Car();
 const bank = new Bank();
 const insuranceInc = new Insurance();
-myCar.register(bank);
-myCar.register(insuranceInc);
+myCar.subscribe(bank);
+myCar.subscribe(insuranceInc);
 myCar.broke();
