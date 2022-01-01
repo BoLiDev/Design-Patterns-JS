@@ -1,6 +1,7 @@
 /**
  * 1 + n + n * (m! / 2)
  * 职责划分不清晰 ==> 混淆了 实现（抽象到具体）与 拓展（基础功能到复杂功能）
+ * 子类急剧膨胀，充斥重复代码
  */
 
 export default abstract class Stream {
